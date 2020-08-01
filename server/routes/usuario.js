@@ -1,3 +1,7 @@
+// ===============================
+// IMPORTACIONES
+// ===============================
+
 const express = require('express');
 const app = express();
 const Usuario = require("../models/usuario");
@@ -5,13 +9,34 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const _= require("underscore");
 
-app.get("/usuario", (req, res)=>{//peticion get
+const {verificaToken, verificaAdminRole} = require ("../middlewares/autenticacion");
+
+
+// ===============================
+// ===============================
+
+// no es necesario definir los parentesisi de funcion al incorporar middleware com lo es el "verificaTokken"
+
+
+app.get("/usuario", verificaToken, (req, res)=>{//peticion get
     
+    
+
+
+
+
     let desde =  req.query.desde || 0;
     //transformo "desde" de string a numero para poder mandarlo como parametro.
     desde = Number(desde);
     let limite = req.query.limite || 5;
     limite = Number(limite);
+
+
+
+
+
+
+
 
 
     //Si agregamos de parametro, en la funcion "find",vamos a buscar la cantidad de registros que posean esa propiedad. por ejemplo la propiedad "google:true", quiere decir encuentrame los usuarios creados mediante google. En esta app, no se muestra ninguno dado que ninguno fue creado de esa manera.
@@ -57,7 +82,7 @@ app.get("/usuario", (req, res)=>{//peticion get
 
 
 //"""""""""""""""""USUARIO POST"""""""""""""""""""
-app.post("/usuario", (req, res)=>{//peticion post
+app.post("/usuario",[verificaToken,verificaAdminRole], (req, res)=>{//peticion post
 
     
     //Esto escribiria en formato json la informacion mandada desde la app.
@@ -98,7 +123,7 @@ app.post("/usuario", (req, res)=>{//peticion post
 
 //"""""""""""""""""USUARIO PUT"""""""""""""""""""
 
-app.put("/usuario/:id", (req, res)=>{//peticion put
+app.put("/usuario/:id",[verificaToken,verificaAdminRole], (req, res)=>{//peticion put
 
     let id= req.params.id;
     let body =_.pick( req.body,["nombre","email","img","estado"] ) ;
@@ -132,7 +157,7 @@ app.put("/usuario/:id", (req, res)=>{//peticion put
 
 
 //"""""""""""""""""USUARIO DELETE"""""""""""""""""""
-app.delete("/usuario/:id", (req, res)=>{//peticion post
+app.delete("/usuario/:id",[verificaToken,verificaAdminRole], (req, res)=>{//peticion post
 
     let id = req.params.id;
     let cambiaEstado = {

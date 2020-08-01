@@ -15,6 +15,28 @@ process.env.PORT = process.env.PORT || 3000;
 // NODE_ENV es la variable que nos da heroku para saber si nuestro sistema esta desplegado en el
 process.env.NODE_ENV = process.env.NODE_ENV || "dev";
 
+// ============================
+// Vencimiento el Token             
+// ============================
+// 60 segundos
+//  60 minutos
+//  24horas
+//  30 dias
+
+process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 *30;
+
+
+// ============================
+// SEED o SIGN de autenticacion
+// ============================
+process.env.SEED = process.env.SEED || "este es el seed desarrolo"
+
+
+
+
+
+
+
 
 // ============================
 // BASE DE DATOS
