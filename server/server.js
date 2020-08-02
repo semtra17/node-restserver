@@ -3,10 +3,16 @@ const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 require("./config/config")
-
+// Path es un paquete ya integrado en node.js que nos 
+const path = require("path");
 
 
 app.use(bodyParser.urlencoded({ extended: false }))
+
+// Habilitar la carpeta public
+//  el paqeute PATH nos une nuestras direcciones de conexion, para decir de alguna manera, asi las conexiones se hagan bien
+app.use(express.static(path.resolve(__dirname, "../public")));
+
 
 
 
