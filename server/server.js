@@ -17,7 +17,7 @@ app.use(express.static(path.resolve(__dirname, "../public")));
 
 
 // CONFIGURACION GLOBAL DE RUTAS
-app.use(require("./routes/allroutes"))
+app.use(require("./routes/allroutes"));
 
 //=================CONEXION MONGO DATABASE==================
 mongoose.connect(process.env.URLDB,{
