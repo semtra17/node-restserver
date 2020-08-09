@@ -1,24 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Google Sign in demo</title>
     <meta name="google-signin-client_id" content="469622746469-hbmbfu7qcg0k3go88i5sho86eermrvqp.apps.googleusercontent.com">
 </head>
+
 <body>
 
+
+    <!-- <img src="http://localhost:3000/imagen/productos/5f2f627d2c1c3311b432bee3-961.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InJvbGUiOiJBRE1JTl9ST0xFIiwiZXN0YWRvIjp0cnVlLCJnb29nbGUiOmZhbHNlLCJfaWQiOiI1ZjJmMGRlMjBkYzc0NTBhMDA4NDE1MmEiLCJub21icmUiOiIxMzJsMiIsImVtYWlsIjoic2VtdHJhMThAZ21haWwuY29tIiwiX192IjowLCJpbWciOiI1ZjJmMGRlMjBkYzc0NTBhMDA4NDE1MmEtNzIzLmpwZyJ9LCJpYXQiOjE1OTY5NDU0NzEsImV4cCI6MTU5Njk0ODA2M30.5XNux3254dqxhWV9289IHD73zZKxKNdG3AHUk3S2Pzg"
+        alt=""> -->
+
     <div class="g-signin2" data-onsuccess="onSignIn"></div>
-    
+
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <a href="#" onclick="signOut();">Sign out</a>
     <script>
-    function signOut() {
-        var auth2 = gapi.auth2.getAuthInstance();
-        auth2.signOut().then(function () {
-        console.log('User signed out.');
-        });
-    }
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function() {
+                console.log('User signed out.');
+            });
+        }
     </script>
     <script>
         function onSignIn(googleUser) {
@@ -30,7 +36,7 @@
             var id_token = googleUser.getAuthResponse().id_token;
 
             console.log(id_token);
-            
+
             var xhr = new XMLHttpRequest();
             xhr.open('POST', '/google');
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -39,7 +45,7 @@
             };
             xhr.send('idtoken=' + id_token);
         }
-       
     </script>
 </body>
+
 </html>
